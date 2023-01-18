@@ -1,13 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
   <title>Document</title>
 </head>
-<body>
 
+<body class="body">
+  <div class="wrapper">
+    <header class="header">
+      <h1 class="header__title title">To Do</h1>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <form class="form">
+          <input class="form__input" type="text" placeholder="Что необходимо выполнить?">
+        </form>
+        <section class="todo">
+          <h2 class="todo__title">Все задачи</h2>
+          <ul class="todo__list">
+            <li class="todo__item task task_complete">
+              <button class="task__status"></button>
+              <p class="task__message">Сделать домашнее задание</p>
+              <button class="task__delete-button">
+                <img class="task__delete-img" src="images/delete.svg" alt="Крест кнопки удаления">
+              </button>
+            </li>
+            <li class="todo__item task">
+              <button class="task__status"></button>
+              <p class="task__message">Покормить кота</p>
+              <button class="task__delete-button">
+                <img class="task__delete-img" src="images/delete.svg" alt="Крест кнопки удаления">
+              </button>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <h1 class="footer__title title">List</h1>
+    </footer>
+  </div>
   <script src="js/main.js"></script>
 </body>
+
 </html>
