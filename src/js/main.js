@@ -24,8 +24,21 @@ function createTask(taskText, isComplete = false) {
   checkButton.classList.add("task__status", "task__button");
   createCheckButton(checkButton);
 
+  const checkButtonImg = document.createElement("img");
+  checkButtonImg.classList.add("task__status-img");
+  checkButtonImg.setAttribute("src", "images/check-mark.svg");
+  checkButtonImg.setAttribute("alt", "Галочка завершенной задачи");
+  checkButton.appendChild(checkButtonImg);
+
   const text = document.createElement("p");
   text.classList.add("task__message");
+  text.addEventListener("dblclick", function() {
+    this.contentEditable = true;
+    this.focus();
+  });
+  text.addEventListener("blur", function() {
+    this.contentEditable = false;
+  })
   text.innerText = taskText;
 
   const deleteButton = document.createElement("button");
