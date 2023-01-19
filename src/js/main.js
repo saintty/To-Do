@@ -50,10 +50,22 @@ function saveTasksInLocalStorage() {
   localStorage.setItem("todo list tasks", savedTasks);
 }
 
+function loadTasksFromLocalStorage(tasksList) {
+  const savedTasks = localStorage.getItem("todo list tasks");
+
+  if (savedTasks) {
+    savedTasks.split(",").forEach((task) => {
+      tasksList.appendChild(createTask(task));
+    });
+  }
+}
+
 function init() {
   const form = document.getElementById("form");
   const input = document.getElementById("input");
   const tasksList = document.getElementById("todo__list");
+
+  loadTasksFromLocalStorage(tasksList);
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
