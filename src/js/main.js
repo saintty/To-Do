@@ -39,6 +39,17 @@ function createTask(taskText) {
   return task;
 }
 
+function saveTasksInLocalStorage() {
+  const savedTasks = [];
+  const tasks = [...document.getElementsByClassName("task")];
+
+  tasks.forEach((task) => {
+    savedTasks.push(task.querySelector(".task__message").innerText);
+  });
+
+  localStorage.setItem("todo list tasks", savedTasks);
+}
+
 function init() {
   const form = document.getElementById("form");
   const input = document.getElementById("input");
@@ -47,8 +58,11 @@ function init() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    tasksList.appendChild(createTask(input.value));
-    input.value = "";
+    if (input.value !== "") {
+      tasksList.appendChild(createTask(input.value));
+      input.value = "";
+      saveTasksInLocalStorage();
+    }
   });
 }
 
