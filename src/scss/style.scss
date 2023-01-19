@@ -33,6 +33,34 @@
 }
 
 .todo {
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__button {
+    padding: 0 10px;
+
+    font-size: 24px;
+    line-height: 28px;
+
+    border-radius: 10px;
+
+    transition: background 0.2s linear;
+  }
+
+  &__button:hover {
+    padding: 0 8px;
+
+    background-color: rgba($border, 25%);
+    border: 2px solid $border;
+  }
+
+  &__button + &__button {
+    margin-left: 15px;
+  }
+
   &__title {
     margin-bottom: 15px;
 
@@ -46,10 +74,12 @@
     justify-content: center;
 
     padding: 15px;
+
+    border-bottom: 2px solid $border;
   }
 
-  &__item + &__item {
-    border-top: 2px solid $border;
+  &__item:not([style*="display: none;"]):last-child {
+    border: none;
   }
 }
 
@@ -82,7 +112,7 @@
   &__status::after {
     position: absolute;
     top: 50%;
-    left: 3.5px;
+    right: 3px;
 
     width: 20px;
     height: 20px;

@@ -24,7 +24,14 @@
           <input id="input" class="form__input" type="text" placeholder="Что необходимо выполнить?" autocomplete="off">
         </form>
         <section class="todo">
-          <h2 class="todo__title">Все задачи</h2>
+          <div class="todo__controls">
+            <h2 class="todo__title">Все задачи</h2>
+            <div class="todo__buttons">
+              <button id="todo__button_all" class="todo__button">Все</button>
+              <button id="todo__button_active" class="todo__button">Активные</button>
+              <button id="todo__button_finished" class="todo__button">Завершенные</button>
+            </div>
+          </div>
           <ul id="todo__list" class="todo__list">
           </ul>
         </section>

@@ -1,6 +1,7 @@
 function createCheckButton(button) {
   button.addEventListener("click", () => {
     button.parentNode.classList.toggle("task_complete");
+    saveTasksInLocalStorage();
   });
 }
 
@@ -72,6 +73,20 @@ function loadTasksFromLocalStorage(tasksList) {
   }
 }
 
+function showTaskByType(taskList, type) {
+  for (let task of taskList.children) {
+    if (type === "active" && task.classList.contains("task_complete")) {
+      task.style.display = "none";
+    }
+    else if (type === "finished" && !task.classList.contains("task_complete")) {
+      task.style.display = "none";
+    }
+    else {
+      task.style.display = null;
+    }
+  }
+}
+
 function init() {
   const form = document.getElementById("form");
   const input = document.getElementById("input");
@@ -88,6 +103,15 @@ function init() {
       saveTasksInLocalStorage();
     }
   });
+
+  const allTasksButton = document.getElementById("todo__button_all");
+  allTasksButton.addEventListener("click", () => { showTaskByType(tasksList, "all"); });
+
+  const activeTasksButton = document.getElementById("todo__button_active");
+  activeTasksButton.addEventListener("click", () => { showTaskByType(tasksList, "active"); });
+
+  const finishedTasksButton = document.getElementById("todo__button_finished");
+  finishedTasksButton.addEventListener("click", () => { showTaskByType(tasksList, "finished"); });
 }
 
 window.onload = init;
