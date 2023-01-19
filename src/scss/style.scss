@@ -37,6 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 15px;
   }
 
   &__button {
@@ -61,11 +62,22 @@
     margin-left: 15px;
   }
 
+  &__clear {
+    padding: 2px 10px;
+  }
+
   &__title {
-    margin-bottom: 15px;
 
     font-size: 30px;
     line-height: 36px;
+  }
+
+  &__list {
+    margin-bottom: 15px;
+  }
+
+  &__list:empty ~ &__controls {
+    display: none;
   }
 
   &__item {
@@ -76,10 +88,6 @@
     padding: 15px;
 
     border-bottom: 2px solid $border;
-  }
-
-  &__item:not([style*="display: none;"]):last-child {
-    border: none;
   }
 }
 
@@ -126,10 +134,12 @@
 
   &__message {
     width: 100%;
-    padding: 0 15px;
+    padding: 4px 15px;
   }
 
   &__delete-button {
+    margin-left: 30px;
+
     background-color: transparent;
     border: none;
     opacity: 0;

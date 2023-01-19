@@ -86,7 +86,7 @@ function loadTasksFromLocalStorage(tasksList) {
   }
 }
 
-function showTaskByType(taskList, type) {
+function showTasksByType(taskList, type) {
   for (let task of taskList.children) {
     if (type === "active" && task.classList.contains("task_complete")) {
       task.style.display = "none";
@@ -98,6 +98,17 @@ function showTaskByType(taskList, type) {
       task.style.display = null;
     }
   }
+}
+
+function clearCompletedTask(taskList) {
+  const tasks = taskList.childNodes;
+
+  for (let i = tasks.length - 1; i >= 0; --i) {
+    if (tasks[i].classList.contains("task_complete")) {
+      tasks[i].remove();
+    }
+  }
+  saveTasksInLocalStorage();
 }
 
 function init() {
@@ -118,13 +129,16 @@ function init() {
   });
 
   const allTasksButton = document.getElementById("todo__button_all");
-  allTasksButton.addEventListener("click", () => { showTaskByType(tasksList, "all"); });
+  allTasksButton.addEventListener("click", () => { showTasksByType(tasksList, "all"); });
 
   const activeTasksButton = document.getElementById("todo__button_active");
-  activeTasksButton.addEventListener("click", () => { showTaskByType(tasksList, "active"); });
+  activeTasksButton.addEventListener("click", () => { showTasksByType(tasksList, "active"); });
 
   const finishedTasksButton = document.getElementById("todo__button_finished");
-  finishedTasksButton.addEventListener("click", () => { showTaskByType(tasksList, "finished"); });
+  finishedTasksButton.addEventListener("click", () => { showTasksByType(tasksList, "finished"); });
+
+  const clearButton = document.getElementById("clear-complete");
+  clearButton.addEventListener("click", () => {clearCompletedTask(tasksList); });
 }
 
 window.onload = init;
