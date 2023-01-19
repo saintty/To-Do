@@ -58,9 +58,8 @@
 
   transition: all 0.1s linear;
 
-  &__progress {
-    position: absolute;
-    top: -9999px;
+  &__button {
+    flex-shrink: 0;
   }
 
   &__status {
@@ -74,6 +73,10 @@
     border-radius: 50%;
 
     transition: all 0.2s linear;
+  }
+
+  &__status:hover {
+    background-color: $mark-hover;
   }
 
   &__status::after {
@@ -117,6 +120,10 @@
   }
 
   &:hover &__delete-button {
+    opacity: 0.5;
+  }
+
+  &:hover &__delete-button:hover {
     opacity: 1;
   }
 

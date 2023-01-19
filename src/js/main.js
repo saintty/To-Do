@@ -7,15 +7,20 @@ function createCheckButton(button) {
 function createDeleteButton(button) {
   button.addEventListener("click", () => {
     button.parentNode.remove();
+    saveTasksInLocalStorage();
   });
 }
 
-function createTask(taskText) {
+function createTask(taskText, isComplete = false) {
   const task = document.createElement("li");
   task.classList.add("todo__item", "task");
 
+  if (isComplete) {
+    task.classList.add("task_complete");
+  }
+
   const checkButton = document.createElement("button");
-  checkButton.classList.add("task__status");
+  checkButton.classList.add("task__status", "task__button");
   createCheckButton(checkButton);
 
   const text = document.createElement("p");
@@ -23,7 +28,7 @@ function createTask(taskText) {
   text.innerText = taskText;
 
   const deleteButton = document.createElement("button");
-  deleteButton.classList.add("task__delete-button");
+  deleteButton.classList.add("task__delete-button", "task__button");
   createDeleteButton(deleteButton);
 
   const deleteButtonImg = document.createElement("img");
@@ -44,18 +49,25 @@ function saveTasksInLocalStorage() {
   const tasks = [...document.getElementsByClassName("task")];
 
   tasks.forEach((task) => {
-    savedTasks.push(task.querySelector(".task__message").innerText);
+    const taskText = task.querySelector(".task__message").innerText;
+    const isComplete = task.classList.contains("task_complete");
+    savedTasks.push([taskText, isComplete]);
   });
 
-  localStorage.setItem("todo list tasks", savedTasks);
+  localStorage.setItem("todo list tasks", JSON.stringify(savedTasks));
 }
 
 function loadTasksFromLocalStorage(tasksList) {
-  const savedTasks = localStorage.getItem("todo list tasks");
+  let savedTasks = localStorage.getItem("todo list tasks");
 
   if (savedTasks) {
-    savedTasks.split(",").forEach((task) => {
-      tasksList.appendChild(createTask(task));
+    savedTasks = JSON.parse(savedTasks);
+
+    savedTasks.forEach((task) => {
+      const taskText = task[0];
+      const isComplete = task[1];
+
+      tasksList.appendChild(createTask(taskText, isComplete));
     });
   }
 }
