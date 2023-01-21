@@ -21,6 +21,10 @@ function init() {
   });
 
   utils.createControls(tasksList);
+
+  if (window.innerWidth < 401) {
+    input.setAttribute("placeholder", "Что выполнить?");
+  }
 }
 
 window.onload = init;

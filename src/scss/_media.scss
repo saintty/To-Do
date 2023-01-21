@@ -1,0 +1,150 @@
+@media (max-width: 900px) {
+  .title {
+    font-size: 54px;
+    line-height: 54px;
+  }
+
+  .form {
+    &__input {
+      padding: 15px;
+    }
+
+    &__input,
+    &__input::placeholder {
+      font-size: 24px;
+      line-height: 30px;
+    }
+  }
+
+  .todo {
+    &__title {
+      font-size: 26px;
+      line-height: 30px;
+    }
+
+    &__button {
+      font-size: 21px;
+    }
+
+    &__button + &__button {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .todo {
+    &__controls_large {
+      justify-content: flex-end;
+    }
+
+    &__buttons_wide {
+      margin-bottom: 15px;
+    }
+
+    &__info {
+      order: 1;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .todo {
+    &__button {
+      padding: 0 8px;
+
+      background-color: rgba($border, 25%);
+      border: 2px solid $border;
+    }
+  }
+
+  .task {
+    &__status {
+      margin-right: 15px;
+    }
+
+    &__status:hover {
+      background-color: #fff;
+    }
+
+    &__delete-button {
+      margin-left: 15px;
+    }
+
+    &__delete-button,
+    &:hover &__delete-button,
+    &:hover &__delete-button:hover {
+      opacity: 1;
+    }
+
+    &__message {
+      padding: 4px 0;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .title {
+    padding: 15px;
+  }
+
+  .form {
+    &__input,
+    &__input::placeholder {
+      font-size: 20px;
+      line-height: 20px;
+
+      border-radius: 5px;
+    }
+  }
+
+  .todo {
+    &__title {
+      width: 100%;
+      margin-bottom: 15px;
+
+      font-size: 23px;
+    }
+
+    &__controls,
+    &__buttons_wide {
+      margin-bottom: 0;
+    }
+
+    &__buttons {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+    }
+
+    &__button {
+      margin-right: 10px;
+      margin-bottom: 15px;
+    }
+
+    &__button + &__button {
+      margin-left: 0;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .form {
+    &__input::placeholder {
+      content: "Что выполнить";
+    }
+  }
+
+  .todo {
+    &__button {
+      width: 100%;
+    }
+
+    &__info {
+      text-align: center;
+    }
+  }
+}
