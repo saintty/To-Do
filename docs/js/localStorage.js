@@ -1,9 +1,9 @@
 import { createTask } from "./task.js";
 import { updateAmountOfActiveTasks } from "./utils.js";
 
-export function save(tasksList) {
+export function save(taskList) {
   const savedTasks = [];
-  const tasks = [...tasksList.children];
+  const tasks = [...taskList.children];
 
   for (let i = tasks.length - 1; i >= 0; --i) {
     const taskText = tasks[i].querySelector(".task__message").innerText;
@@ -11,23 +11,20 @@ export function save(tasksList) {
     savedTasks.push([taskText, isComplete]);
   }
 
-  localStorage.setItem("todo list tasks", JSON.stringify(savedTasks));
+  localStorage.setItem("todo task list", JSON.stringify(savedTasks));
 }
 
-export function load(tasksList) {
-  let savedTasks = localStorage.getItem("todo list tasks");
+export function load(taskList) {
+  let savedTasks = localStorage.getItem("todo task list");
 
   if (savedTasks) {
     savedTasks = JSON.parse(savedTasks);
 
     savedTasks.forEach((task) => {
-      const taskText = task[0];
-      const isComplete = task[1];
-
-      createTask(tasksList, taskText, isComplete);
+      createTask(taskList, task[0], task[1]);
     });
   }
 
-  updateAmountOfActiveTasks(tasksList);
+  updateAmountOfActiveTasks(taskList);
 }
 

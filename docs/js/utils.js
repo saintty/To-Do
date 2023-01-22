@@ -13,13 +13,14 @@ function showTasksByType(taskList, type) {
 }
 
 function clearCompletedTasks(taskList) {
-  const tasks = taskList.childNodes;
+  const tasks = [...taskList.children];
 
   for (let i = tasks.length - 1; i >= 0; --i) {
     if (tasks[i].classList.contains("complete")) {
       tasks[i].remove();
     }
   }
+
   storage.save(taskList);
 }
 
@@ -48,14 +49,9 @@ function checkAllTask(taskList) {
 }
 
 function getAmountOfActiveTasks(taskList) {
-  let activeTasks = 0;
-  [...taskList.children].forEach((task) => {
-    if (!task.classList.contains("complete")) {
-      activeTasks += 1;
-    }
-  });
-
-  return activeTasks;
+  return [...taskList.children].reduce((activeTask, task) => {
+    return task.classList.contains("complete") ? activeTask : activeTask + 1;
+  }, 0);
 }
 
 export function updateAmountOfActiveTasks(taskList) {
@@ -91,5 +87,3 @@ export function createControls(taskList) {
     updateAmountOfActiveTasks(taskList);
   });
 }
-
-//  ДОБАВЛЯТЬ ЗАДАНИЯ В НАЧАЛО СПИСКА
