@@ -7,6 +7,8 @@
   .form {
     &__input {
       padding: 15px;
+
+      border-radius: 15px;
     }
 
     &__input,
@@ -38,13 +40,9 @@
       justify-content: flex-end;
     }
 
-    &__buttons_wide {
-      margin-bottom: 15px;
-    }
-
     &__info {
-      order: 1;
       width: 100%;
+      margin-bottom: 15px;
     }
   }
 }
@@ -68,6 +66,11 @@
       background-color: #fff;
     }
 
+    &__status-img {
+      width: 25px;
+      height: 25px;
+    }
+
     &__delete-button {
       margin-left: 15px;
     }
@@ -85,6 +88,10 @@
 }
 
 @media (max-width: 550px) {
+  .container {
+    padding: 0 10px;
+  }
+
   .title {
     padding: 15px;
   }
@@ -127,6 +134,29 @@
 
     &__button + &__button {
       margin-left: 0;
+    }
+  }
+
+  .task {
+    &__status {
+      margin-right: 10px;
+    }
+
+    &__status-img {
+      width: 20px;
+      height: 20px;
+    }
+
+    &__message {
+      padding: 4px 5px;
+
+      font-size: 20px;
+      line-height: 20px;
+    }
+
+    &__delete-img {
+      width: 15px;
+      height: 15px;
     }
   }
 }
