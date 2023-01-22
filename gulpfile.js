@@ -30,14 +30,14 @@ export const styles = () => {
     .pipe(gulp.dest("./src/css"));
 };
 
-export const scripts = () => {
-  return gulp
-    .src("./src/js/main.js")
-    .pipe(uglify.default())
-    .pipe(rename("main.min.js"))
-    .pipe(gulp.dest("./src/js"))
-    .pipe(browserSync.stream());
-};
+// export const scripts = () => {
+//   return gulp
+//     .src("./src/js/main.js")
+//     .pipe(uglify.default())
+//     .pipe(rename("main.min.js"))
+//     .pipe(gulp.dest("./src/js"))
+//     .pipe(browserSync.stream());
+// };
 
 export const bsync = () => {
   browserSync.create().init({
@@ -68,7 +68,7 @@ export const images = () => {
 
 export const watching = () => {
   gulp.watch("./src/scss/**/*.scss", styles);
-  gulp.watch("./src/js/main.js", scripts);
+  // gulp.watch("./src/js/main.js", scripts);
 };
 
 export const cleandocs = () => {
@@ -87,7 +87,7 @@ export const buildCss = () => {
 
 export const buildJs = () => {
   return gulp
-    .src(["./src/js/**.*", "!./src/js/main.js"], { base: "./src" })
+    .src("./src/js/**.*", { base: "./src" })
     .pipe(gulp.dest("./docs"));
 };
 
@@ -99,4 +99,4 @@ export const build = gulp.series(
   images
 );
 
-export const run = gulp.parallel(styles, scripts, bsync, watching);
+export const run = gulp.parallel(styles, bsync, watching);
