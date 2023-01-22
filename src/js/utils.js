@@ -25,21 +25,26 @@ function clearCompletedTasks(taskList) {
 
 function checkAllTask(taskList) {
   const tasks = [...taskList.children];
-  const checkedAll = tasks.every((task) => task.classList.contains("complete"));
+  const checkedAll = tasks.every((task) => {
+    return task.style.display !== "none" ? task.classList.contains("complete") : true;
+  });
 
   if (checkedAll) {
     tasks.forEach((task) => {
-      task.classList.remove("complete");
+      if (task.style.display !== "none") {
+        task.classList.remove("complete");
+      }
     });
   }
   else {
     tasks.forEach((task) => {
-      task.classList.add("complete");
+      if (task.style.display !== "none") {
+        task.classList.add("complete");
+      }
     });
   }
 
   storage.save(taskList);
-
 }
 
 function getAmountOfActiveTasks(taskList) {
@@ -88,4 +93,3 @@ export function createControls(taskList) {
 }
 
 //  ДОБАВЛЯТЬ ЗАДАНИЯ В НАЧАЛО СПИСКА
-  
