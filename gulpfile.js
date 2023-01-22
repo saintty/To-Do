@@ -87,7 +87,7 @@ export const buildCss = () => {
 
 export const buildJs = () => {
   return gulp
-    .src("./src/js/main.min.js", { base: "./src" })
+    .src(["./src/js/**.*", "!./src/js/main.js"], { base: "./src" })
     .pipe(gulp.dest("./docs"));
 };
 
