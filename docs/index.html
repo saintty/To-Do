@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>To Do - простой и удобный ежедневник</title>
+  <meta name="keywords" content="ToDo, планировщик, ежедневник, список дел, задачи">
+  <meta name="description" content="ToDo - простое и полезное приложение для записи всевозможных задач. Максимально удобное, незагроможденное управление поможет вам стать продуктивнее.">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="images/favicons/site.webmanifest">
+  <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#a51875">
+  <meta name="msapplication-TileColor" content="#603cba">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="body">
+  <div class="wrapper">
+    <header class="header">
+      <h1 class="header__title title">To Do</h1>
+    </header>
+
+    <main class="main">
+      <div class="container">
+        <form id="form" class="form">
+          <input id="input" class="form__input" type="text" placeholder="Что необходимо выполнить?" autocomplete="off">
+        </form>
+        <section class="todo">
+          <div class="todo__controls">
+            <h2 class="todo__title">Задачи</h2>
+            <div class="todo__buttons">
+              <button id="show-all" class="todo__button">Все</button>
+              <button id="show-active" class="todo__button">Активные</button>
+              <button id="show-finished" class="todo__button">Завершенные</button>
+            </div>
+          </div>
+          <ul id="todo__list" class="todo__list"></ul>
+          <div class="todo__controls todo__controls_large">
+            <p id="todo__info" class="todo__info">Всё выполнено</p>
+            <div class="todo__buttons todo__buttons_wide">
+              <button id="check-all" class="todo__button">Отметить все</button>
+              <button id="clear-complete" class="todo__button">Удалить завершенные</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <h1 class="footer__title title">List</h1>
+    </footer>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
