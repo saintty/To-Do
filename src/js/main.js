@@ -12,13 +12,11 @@ function init() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const message = input.value;
-    if (message.trim() !== "") {
+    if (input.value.trim() !== "") {
       task.createTask(tasksList, input.value);
       storage.save(tasksList);
       utils.updateAmountOfActiveTasks(tasksList);
     }
-
     input.value = "";
   });
 

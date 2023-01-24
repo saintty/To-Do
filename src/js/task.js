@@ -10,14 +10,14 @@ export function createTask(container, message, isComplete = false) {
   }
 
   addButton("check", task, container);
-  createDescription(task, message);
+  createDescription(task, message, container);
   addButton("del", task, container);
 
   container.prepend(task);
   storage.save(container);
 }
 
-function createDescription(task, message) {
+function createDescription(task, message, container) {
   const text = document.createElement("p");
   text.classList.add("task__message");
   text.innerText = message;
@@ -29,6 +29,16 @@ function createDescription(task, message) {
 
   text.addEventListener("blur", function() {
     this.contentEditable = false;
+    const newMessage = this.innerText.split("\n").filter(line => line).map((line) => line.trim()).join("\n");
+
+    if (newMessage.length) {
+      this.innerText = newMessage;
+    }
+    else {
+      this.parentNode.remove();
+      storage.save(container);
+      utils.updateAmountOfActiveTasks(container);
+    }
   });
 
   task.appendChild(text);
