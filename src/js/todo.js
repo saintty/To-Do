@@ -2,7 +2,7 @@ import * as utils from "./utils.js";
 import * as storage from "./localStorage.js";
 import * as task from "./task.js";
 
-function init() {
+export function init() {
   const form = document.getElementById("form");
   const input = document.getElementById("input");
   const taskList = document.getElementById("todo__list");
@@ -32,5 +32,3 @@ function inputHandler(input, taskList) {
     input.value = "";
   }
 }
-
-window.onload = init;
