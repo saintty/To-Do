@@ -59,6 +59,13 @@
     border: 2px solid $border;
   }
 
+  &__button_selected {
+    padding: 0 8px;
+
+    background-color: rgba($border-active, 25%);
+    border: 2px solid $border-active;
+  }
+
   &__button + &__button {
     margin-left: 15px;
   }

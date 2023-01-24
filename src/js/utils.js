@@ -73,12 +73,23 @@ export function updateAmountOfActiveTasks(taskList) {
   }
 }
 
+function setSelectedType(buttons, selectedButton) {
+  buttons.forEach((button) => button.classList.remove("todo__button_selected"));
+  selectedButton.classList.add("todo__button_selected");
+}
+
 export function createControls(taskList) {
   const types = ["all", "active", "finished"];
+  const buttons = [
+    document.getElementById(`show-${types[0]}`),
+    document.getElementById(`show-${types[1]}`),
+    document.getElementById(`show-${types[2]}`),
+  ];
 
-  types.forEach((type) => {
-    document.getElementById(`show-${type}`).addEventListener("click", () => {
-      showTasksByType(taskList, type);
+  buttons.forEach((button, idx) => {
+    button.addEventListener("click", () => {
+      showTasksByType(taskList, types[idx]);
+      setSelectedType(buttons, button);
     });
   });
 
@@ -91,5 +102,3 @@ export function createControls(taskList) {
     updateAmountOfActiveTasks(taskList);
   });
 }
-
-//  ДОБАВЛЯТЬ ЗАДАНИЯ В НАЧАЛО СПИСКА
