@@ -1,7 +1,11 @@
 import * as utils from "./utils.js";
 import * as storage from "./localStorage.js";
 
-export function createTask(container, message, {isComplete = false, visible = true}) {
+export function createTask(
+  container,
+  message,
+  { isComplete = false, visible = true }
+) {
   const task = document.createElement("li");
   task.classList.add("todo__item", "task");
   task.setAttribute("data-visibility", visible ? "shown" : "hidden");
@@ -23,19 +27,22 @@ function createDescription(task, message, container) {
   text.classList.add("task__message");
   text.innerText = message;
 
-  text.addEventListener("dblclick", function() {
+  text.addEventListener("dblclick", function () {
     this.contentEditable = true;
     this.focus();
   });
 
-  text.addEventListener("blur", function() {
+  text.addEventListener("blur", function () {
     this.contentEditable = false;
-    const newMessage = this.innerText.split("\n").filter(line => line).map((line) => line.trim()).join("\n");
+    const newMessage = this.innerText
+      .split("\n")
+      .filter((line) => line)
+      .map((line) => line.trim())
+      .join("\n");
 
     if (newMessage.length) {
       this.innerText = newMessage;
-    }
-    else {
+    } else {
       this.parentNode.remove();
       storage.save(container);
       utils.updateAmountOfActiveTasks(container);
@@ -59,11 +66,19 @@ function addButton(type, task, container) {
 
     button.addEventListener("click", () => {
       task.classList.toggle("complete");
+      setTimeout(() => {
+        if (
+          (utils.category === "active" && task.classList.contains("complete")) ||
+          (utils.category === "finished" && !task.classList.contains("complete"))
+        ) {
+          task.dataset.visibility = "hidden";
+        }
+      }, 800);
+
       storage.save(container);
       utils.updateAmountOfActiveTasks(container);
     });
-  }
-  else {
+  } else {
     button.classList.add("task__delete-button");
     buttonImg.classList.add("task__delete-img");
     buttonImg.setAttribute("src", "images/delete.svg");
