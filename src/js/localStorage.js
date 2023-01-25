@@ -21,10 +21,7 @@ export function load(tasksList) {
     savedTasks = JSON.parse(savedTasks);
 
     savedTasks.forEach((task) => {
-      const taskText = task[0];
-      const isComplete = task[1];
-
-      createTask(tasksList, taskText, isComplete);
+      createTask(tasksList, task[0], {isComplete: task[1]});
     });
   }
 

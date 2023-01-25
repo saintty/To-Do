@@ -25,7 +25,7 @@ function inputHandler(input, taskList) {
     event.preventDefault();
 
     if (input.value.trim() !== "") {
-      task.createTask(taskList, input.value);
+      task.createTask(taskList, input.value, {visible: utils.category !== "finished"});
       storage.save(taskList);
       utils.updateAmountOfActiveTasks(taskList);
     }
