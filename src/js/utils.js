@@ -4,14 +4,7 @@ export let category = "all";
 
 export function showTasksByCategory(taskList) {
   for (let task of taskList.children) {
-    if (
-      (category === "active" && task.classList.contains("complete")) ||
-      (category === "finished" && !task.classList.contains("complete"))
-    ) {
-      task.dataset.visibility = "hidden";
-    } else {
-      task.dataset.visibility = "shown";
-    }
+    setTaskVisibility(task);
   }
 }
 
@@ -26,7 +19,7 @@ function clearCompletedTasks(taskList) {
   storage.save(taskList);
 }
 
-function setTaskVisibility(task) {
+export function setTaskVisibility(task) {
   if (
     (category === "active" && task.classList.contains("complete")) ||
     (category === "finished" && !task.classList.contains("complete"))
@@ -58,23 +51,6 @@ function checkAllTask(taskList) {
       }, 800);
     }
   });
-
-  // if (isAllChecked) {
-  //   tasks.forEach((task) => {
-  //     if (task.dataset.visibility === "shown") {
-  //       task.classList.remove("complete");
-  //       setTimeout(() => {
-  //         setTaskVisibility(task);
-  //       }, 800);
-  //     }
-  //   });
-  // } else {
-  //   tasks.forEach((task) => {
-  //     if (task.style.display !== "none") {
-  //       task.classList.add("complete");
-  //     }
-  //   });
-  // }
 
   storage.save(taskList);
 }

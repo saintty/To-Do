@@ -63,12 +63,7 @@ function addButton(type, task, container) {
     button.addEventListener("click", () => {
       task.classList.toggle("complete");
       setTimeout(() => {
-        if (
-          (utils.category === "active" && task.classList.contains("complete")) ||
-          (utils.category === "finished" && !task.classList.contains("complete"))
-        ) {
-          task.dataset.visibility = "hidden";
-        }
+        utils.setTaskVisibility(task);
       }, 800);
 
       storage.save(container);
