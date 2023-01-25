@@ -1,11 +1,7 @@
 import * as utils from "./utils.js";
 import * as storage from "./localStorage.js";
 
-export function createTask(
-  container,
-  message,
-  { isComplete = false, visible = true }
-) {
+export function createTask(container, message, { isComplete = false, visible = true }) {
   const task = document.createElement("li");
   task.classList.add("todo__item", "task");
   task.setAttribute("data-visibility", visible ? "shown" : "hidden");

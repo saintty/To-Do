@@ -157,6 +157,7 @@
     transition: all 0.1s linear;
   }
 
+  &__delete-button:focus,
   &:hover &__delete-button {
     opacity: 0.5;
   }

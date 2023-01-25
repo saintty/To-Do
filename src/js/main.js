@@ -30,6 +30,7 @@ function inputHandler(input, taskList) {
       utils.updateAmountOfActiveTasks(taskList);
     }
     input.value = "";
+    input.blur();
   }
 }
 

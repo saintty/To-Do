@@ -10,7 +10,7 @@ export function showTasksByCategory(taskList) {
     ) {
       task.dataset.visibility = "hidden";
     } else {
-      task.dataset.visibility = "show";
+      task.dataset.visibility = "shown";
     }
   }
 }
@@ -26,27 +26,55 @@ function clearCompletedTasks(taskList) {
   storage.save(taskList);
 }
 
+function setTaskVisibility(task) {
+  if (
+    (category === "active" && task.classList.contains("complete")) ||
+    (category === "finished" && !task.classList.contains("complete"))
+  ) {
+    task.dataset.visibility = "hidden";
+  } else {
+    task.dataset.visibility = "shown";
+  }
+}
+
 function checkAllTask(taskList) {
   const tasks = [...taskList.children];
-  const checkedAll = tasks.every((task) => {
-    return task.style.display !== "none"
+  const isAllChecked = tasks.every((task) => {
+    return task.dataset.visibility === "shown"
       ? task.classList.contains("complete")
       : true;
   });
 
-  if (checkedAll) {
-    tasks.forEach((task) => {
-      if (task.style.display !== "none") {
+  tasks.forEach((task) => {
+    if (task.dataset.visibility === "shown") {
+      if (isAllChecked) {
         task.classList.remove("complete");
-      }
-    });
-  } else {
-    tasks.forEach((task) => {
-      if (task.style.display !== "none") {
+      } else {
         task.classList.add("complete");
       }
-    });
-  }
+
+      setTimeout(() => {
+        setTaskVisibility(task);
+      }, 800);
+    }
+  });
+
+  // if (isAllChecked) {
+  //   tasks.forEach((task) => {
+  //     if (task.dataset.visibility === "shown") {
+  //       task.classList.remove("complete");
+  //       setTimeout(() => {
+  //         setTaskVisibility(task);
+  //       }, 800);
+  //     }
+  //   });
+  // } else {
+  //   tasks.forEach((task) => {
+  //     if (task.style.display !== "none") {
+  //       task.classList.add("complete");
+  //     }
+  //   });
+  // }
 
   storage.save(taskList);
 }
