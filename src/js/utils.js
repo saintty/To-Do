@@ -1,13 +1,14 @@
 import * as storage from "./localStorage.js";
 
-function showTasksByType(taskList, type) {
+function showTasksByCategory(taskList, type) {
   for (let task of taskList.children) {
-    if (type === "active" && task.classList.contains("complete")) {
-      task.style.display = "none";
-    } else if (type === "finished" && !task.classList.contains("complete")) {
-      task.style.display = "none";
+    if (
+      type === "active" && task.classList.contains("complete") ||
+      type === "finished" && !task.classList.contains("complete")
+    ) {
+      task.dataset.visibility = "hidden";
     } else {
-      task.style.display = null;
+      task.dataset.visibility = "show";
     }
   }
 }
@@ -73,23 +74,18 @@ export function updateAmountOfActiveTasks(taskList) {
   }
 }
 
-function setSelectedType(buttons, selectedButton) {
+function setSelectedCategory(buttons, selectedButton) {
   buttons.forEach((button) => button.classList.remove("todo__button_selected"));
   selectedButton.classList.add("todo__button_selected");
 }
 
 export function createControls(taskList) {
-  const types = ["all", "active", "finished"];
-  const buttons = [
-    document.getElementById(`show-${types[0]}`),
-    document.getElementById(`show-${types[1]}`),
-    document.getElementById(`show-${types[2]}`),
-  ];
+  const buttons = [...document.getElementsByClassName("todo__button-category")];
 
-  buttons.forEach((button, idx) => {
+  buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      showTasksByType(taskList, types[idx]);
-      setSelectedType(buttons, button);
+      showTasksByCategory(taskList, button.dataset.category);
+      setSelectedCategory(buttons, button);
     });
   });
 

@@ -4,6 +4,7 @@ import * as storage from "./localStorage.js";
 export function createTask(container, message, isComplete = false) {
   const task = document.createElement("li");
   task.classList.add("todo__item", "task");
+  task.setAttribute("data-visibility", "shown");
 
   if (isComplete) {
     task.classList.add("complete");

@@ -48,6 +48,7 @@
     line-height: 28px;
 
     border-radius: 10px;
+    cursor: pointer;
 
     transition: background 0.2s linear;
   }
@@ -92,6 +93,10 @@
     padding: 15px;
 
     border-bottom: 2px solid $border;
+  }
+
+  &__item[data-visibility="hidden"] {
+    display: none;
   }
 }
 
