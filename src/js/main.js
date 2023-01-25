@@ -6,24 +6,31 @@ function init() {
   const form = document.getElementById("form");
   const input = document.getElementById("input");
   const taskList = document.getElementById("todo__list");
+  const formHandler = inputHandler(input, taskList);
 
   storage.load(taskList);
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    if (input.value !== "") {
-      task.createTask(taskList, input.value);
-      input.value = "";
-      storage.save(taskList);
-      utils.updateAmountOfActiveTasks(taskList);
-    }
-  });
+  form.addEventListener("submit", formHandler);
+  input.addEventListener("blur", formHandler);
 
   utils.createControls(taskList);
 
   if (window.innerWidth < 401) {
     input.setAttribute("placeholder", "Что выполнить?");
+  }
+}
+
+function inputHandler(input, taskList) {
+  return (event) => {
+    event.preventDefault();
+
+    if (input.value.trim() !== "") {
+      task.createTask(taskList, input.value, {visible: utils.category !== "finished"});
+      storage.save(taskList);
+      utils.updateAmountOfActiveTasks(taskList);
+    }
+    input.value = "";
+    input.blur();
   }
 }
 

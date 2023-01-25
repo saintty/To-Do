@@ -55,6 +55,14 @@
       background-color: rgba($border, 25%);
       border: 2px solid $border;
     }
+
+    &__button_selected,
+    &__button_selected:hover {
+      padding: 0 8px;
+
+      background-color: rgba($border-active, 25%);
+      border: 2px solid $border-active;
+    }
   }
 
   .task {
@@ -82,7 +90,7 @@
     }
 
     &__message {
-      padding: 4px 0;
+      padding: 4px;
     }
   }
 }

@@ -1,34 +1,48 @@
 import * as utils from "./utils.js";
 import * as storage from "./localStorage.js";
 
-export function createTask(container, message, isComplete = false) {
+export function createTask(container, message, { isComplete = false, visible = true }) {
   const task = document.createElement("li");
   task.classList.add("todo__item", "task");
+  task.setAttribute("data-visibility", visible ? "shown" : "hidden");
 
   if (isComplete) {
     task.classList.add("complete");
   }
 
   addButton("check", task, container);
-  createDescription(task, message);
+  createDescription(task, message, container);
   addButton("del", task, container);
 
   container.prepend(task);
   storage.save(container);
 }
 
-function createDescription(task, message) {
+function createDescription(task, message, container) {
   const text = document.createElement("p");
   text.classList.add("task__message");
   text.innerText = message;
 
-  text.addEventListener("dblclick", function() {
+  text.addEventListener("dblclick", function () {
     this.contentEditable = true;
     this.focus();
   });
 
-  text.addEventListener("blur", function() {
+  text.addEventListener("blur", function () {
     this.contentEditable = false;
+    const newMessage = this.innerText
+      .split("\n")
+      .filter((line) => line)
+      .map((line) => line.trim())
+      .join("\n");
+
+    if (newMessage.length) {
+      this.innerText = newMessage;
+    } else {
+      this.parentNode.remove();
+      storage.save(container);
+      utils.updateAmountOfActiveTasks(container);
+    }
   });
 
   task.appendChild(text);
@@ -48,11 +62,14 @@ function addButton(type, task, container) {
 
     button.addEventListener("click", () => {
       task.classList.toggle("complete");
+      setTimeout(() => {
+        utils.setTaskVisibility(task);
+      }, 800);
+
       storage.save(container);
       utils.updateAmountOfActiveTasks(container);
     });
-  }
-  else {
+  } else {
     button.classList.add("task__delete-button");
     buttonImg.classList.add("task__delete-img");
     buttonImg.setAttribute("src", "images/delete.svg");

@@ -48,6 +48,7 @@
     line-height: 28px;
 
     border-radius: 10px;
+    cursor: pointer;
 
     transition: background 0.2s linear;
   }
@@ -57,6 +58,13 @@
 
     background-color: rgba($border, 25%);
     border: 2px solid $border;
+  }
+
+  &__button_selected {
+    padding: 0 8px;
+
+    background-color: rgba($border-active, 25%);
+    border: 2px solid $border-active;
   }
 
   &__button + &__button {
@@ -85,6 +93,10 @@
     padding: 15px;
 
     border-bottom: 2px solid $border;
+  }
+
+  &__item[data-visibility="hidden"] {
+    display: none;
   }
 }
 
@@ -131,6 +143,7 @@
 
   &__message {
     width: 100%;
+    max-width: 754px;
     padding: 4px 15px;
   }
 
@@ -144,6 +157,7 @@
     transition: all 0.1s linear;
   }
 
+  &__delete-button:focus,
   &:hover &__delete-button {
     opacity: 0.5;
   }

@@ -1,14 +1,10 @@
 import * as storage from "./localStorage.js";
 
-function showTasksByType(taskList, type) {
+export let category = "all";
+
+export function showTasksByCategory(taskList) {
   for (let task of taskList.children) {
-    if (type === "active" && task.classList.contains("complete")) {
-      task.style.display = "none";
-    } else if (type === "finished" && !task.classList.contains("complete")) {
-      task.style.display = "none";
-    } else {
-      task.style.display = null;
-    }
+    setTaskVisibility(task);
   }
 }
 
@@ -24,26 +20,38 @@ function clearCompletedTasks(taskList) {
   storage.save(taskList);
 }
 
+export function setTaskVisibility(task) {
+  if (
+    (category === "active" && task.classList.contains("complete")) ||
+    (category === "finished" && !task.classList.contains("complete"))
+  ) {
+    task.dataset.visibility = "hidden";
+  } else {
+    task.dataset.visibility = "shown";
+  }
+}
+
 function checkAllTask(taskList) {
   const tasks = [...taskList.children];
-  const checkedAll = tasks.every((task) => {
-    return task.style.display !== "none" ? task.classList.contains("complete") : true;
+  const isAllChecked = tasks.every((task) => {
+    return task.dataset.visibility === "shown"
+      ? task.classList.contains("complete")
+      : true;
   });
 
-  if (checkedAll) {
-    tasks.forEach((task) => {
-      if (task.style.display !== "none") {
+  tasks.forEach((task) => {
+    if (task.dataset.visibility === "shown") {
+      if (isAllChecked) {
         task.classList.remove("complete");
-      }
-    });
-  }
-  else {
-    tasks.forEach((task) => {
-      if (task.style.display !== "none") {
+      } else {
         task.classList.add("complete");
       }
-    });
-  }
+
+      setTimeout(() => {
+        setTaskVisibility(task);
+      }, 800);
+    }
+  });
 
   storage.save(taskList);
 }
@@ -69,12 +77,19 @@ export function updateAmountOfActiveTasks(taskList) {
   }
 }
 
-export function createControls(taskList) {
-  const types = ["all", "active", "finished"];
+function setSelectedCategory(buttons, selectedButton) {
+  category = selectedButton.dataset.category;
+  buttons.forEach((button) => button.classList.remove("todo__button_selected"));
+  selectedButton.classList.add("todo__button_selected");
+}
 
-  types.forEach((type) => {
-    document.getElementById(`show-${type}`).addEventListener("click", () => {
-      showTasksByType(taskList, type);
+export function createControls(taskList) {
+  const buttons = [...document.getElementsByClassName("todo__button-category")];
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setSelectedCategory(buttons, button);
+      showTasksByCategory(taskList);
     });
   });
 

@@ -21,7 +21,7 @@ export function load(taskList) {
     savedTasks = JSON.parse(savedTasks);
 
     savedTasks.forEach((task) => {
-      createTask(taskList, task[0], task[1]);
+      createTask(taskList, task[0], {isComplete: task[1]});
     });
   }
 
