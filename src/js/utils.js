@@ -1,10 +1,12 @@
 import * as storage from "./localStorage.js";
 
-function showTasksByCategory(taskList, type) {
+export let category = "all";
+
+export function showTasksByCategory(taskList) {
   for (let task of taskList.children) {
     if (
-      type === "active" && task.classList.contains("complete") ||
-      type === "finished" && !task.classList.contains("complete")
+      (category === "active" && task.classList.contains("complete")) ||
+      (category === "finished" && !task.classList.contains("complete"))
     ) {
       task.dataset.visibility = "hidden";
     } else {
@@ -27,7 +29,9 @@ function clearCompletedTasks(taskList) {
 function checkAllTask(taskList) {
   const tasks = [...taskList.children];
   const checkedAll = tasks.every((task) => {
-    return task.style.display !== "none" ? task.classList.contains("complete") : true;
+    return task.style.display !== "none"
+      ? task.classList.contains("complete")
+      : true;
   });
 
   if (checkedAll) {
@@ -36,8 +40,7 @@ function checkAllTask(taskList) {
         task.classList.remove("complete");
       }
     });
-  }
-  else {
+  } else {
     tasks.forEach((task) => {
       if (task.style.display !== "none") {
         task.classList.add("complete");
@@ -75,6 +78,7 @@ export function updateAmountOfActiveTasks(taskList) {
 }
 
 function setSelectedCategory(buttons, selectedButton) {
+  category = selectedButton.dataset.category;
   buttons.forEach((button) => button.classList.remove("todo__button_selected"));
   selectedButton.classList.add("todo__button_selected");
 }
@@ -84,8 +88,8 @@ export function createControls(taskList) {
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      showTasksByCategory(taskList, button.dataset.category);
       setSelectedCategory(buttons, button);
+      showTasksByCategory(taskList);
     });
   });
 
