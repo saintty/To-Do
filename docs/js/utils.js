@@ -16,8 +16,6 @@ function clearCompletedTasks(taskList) {
       tasks[i].remove();
     }
   }
-
-  storage.save(taskList);
 }
 
 export function setTaskVisibility(task) {
@@ -52,8 +50,6 @@ function checkAllTask(taskList) {
       }, 800);
     }
   });
-
-  storage.save(taskList);
 }
 
 function getAmountOfActiveTasks(taskList) {
@@ -95,10 +91,12 @@ export function createControls(taskList) {
 
   document.getElementById("clear-complete").addEventListener("click", () => {
     clearCompletedTasks(taskList);
-  });
+    storage.save(taskList);
+});
 
   document.getElementById("check-all").addEventListener("click", () => {
     checkAllTask(taskList);
+    storage.save(taskList);
     updateAmountOfActiveTasks(taskList);
   });
 }

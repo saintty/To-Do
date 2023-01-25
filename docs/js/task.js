@@ -1,34 +1,33 @@
 import * as utils from "./utils.js";
 import * as storage from "./localStorage.js";
 
-export function createTask(container, message, { isComplete = false, visible = true }) {
+export function createTask(container, message, { isComplete = false, isVisible = true }) {
   const task = document.createElement("li");
   task.classList.add("todo__item", "task");
-  task.setAttribute("data-visibility", visible ? "shown" : "hidden");
+  task.setAttribute("data-visibility", isVisible ? "shown" : "hidden");
 
   if (isComplete) {
     task.classList.add("complete");
   }
 
   addButton("check", task, container);
-  createDescription(task, message, container);
+  addDescription(message, task, container);
   addButton("del", task, container);
 
   container.prepend(task);
-  storage.save(container);
 }
 
-function createDescription(task, message, container) {
-  const text = document.createElement("p");
-  text.classList.add("task__message");
-  text.innerText = message;
+function addDescription(message, task, container) {
+  const description = document.createElement("p");
+  description.classList.add("task__message");
+  description.innerText = message;
 
-  text.addEventListener("dblclick", function () {
+  description.addEventListener("dblclick", function () {
     this.contentEditable = true;
     this.focus();
   });
 
-  text.addEventListener("blur", function () {
+  description.addEventListener("blur", function () {
     this.contentEditable = false;
     const newMessage = this.innerText
       .split("\n")
@@ -45,7 +44,7 @@ function createDescription(task, message, container) {
     }
   });
 
-  task.appendChild(text);
+  task.appendChild(description);
 }
 
 function addButton(type, task, container) {
