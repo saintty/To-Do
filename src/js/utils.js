@@ -31,24 +31,20 @@ export function setTaskVisibility(task) {
 
 function checkAllTask(taskList) {
   const tasks = [...taskList.children];
-  const isAllChecked = tasks.every((task) => {
-    return task.dataset.visibility === "shown"
-      ? task.classList.contains("complete")
-      : true;
-  });
+  const isAllChecked = tasks.every((task) =>
+    task.classList.contains("complete")
+  );
 
   tasks.forEach((task) => {
-    if (task.dataset.visibility === "shown") {
-      if (isAllChecked) {
-        task.classList.remove("complete");
-      } else {
-        task.classList.add("complete");
-      }
-
-      setTimeout(() => {
-        setTaskVisibility(task);
-      }, 800);
+    if (isAllChecked) {
+      task.classList.remove("complete");
+    } else {
+      task.classList.add("complete");
     }
+
+    setTimeout(() => {
+      setTaskVisibility(task);
+    }, 300);
   });
 }
 
@@ -92,7 +88,7 @@ export function createControls(taskList) {
   document.getElementById("clear-complete").addEventListener("click", () => {
     clearCompletedTasks(taskList);
     storage.save(taskList);
-});
+  });
 
   document.getElementById("check-all").addEventListener("click", () => {
     checkAllTask(taskList);

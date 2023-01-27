@@ -63,7 +63,7 @@ function addButton(type, task, container) {
       task.classList.toggle("complete");
       setTimeout(() => {
         utils.setTaskVisibility(task);
-      }, 800);
+      }, 300);
 
       storage.save(container);
       utils.updateAmountOfActiveTasks(container);
