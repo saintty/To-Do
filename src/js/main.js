@@ -31,6 +31,7 @@ function handelInputMessage(input, taskList) {
     }
 
     input.value = "";
+    input.focus();
   }
 }
 
