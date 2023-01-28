@@ -3,19 +3,17 @@ import * as storage from "./localStorage.js";
 export let category = "all";
 
 export const showTasksByCategory = (taskList) => {
-  for (let task of taskList.children) {
-    setTaskVisibility(task);
-  }
+  [...taskList.children].forEach((task) => setTaskVisibility(task));
 };
 
 const clearCompletedTasks = (taskList) => {
-  const tasks = [...taskList.children];
+  const tasks = [...taskList.children].reverse();
 
-  for (let i = tasks.length - 1; i >= 0; --i) {
-    if (tasks[i].classList.contains("complete")) {
-      tasks[i].remove();
+  tasks.forEach((task) => {
+    if (task.classList.contains("complete")) {
+      task.remove();
     }
-  }
+  });
 };
 
 export const setTaskVisibility = (task) => {

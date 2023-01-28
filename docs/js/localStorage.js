@@ -5,13 +5,13 @@ export const save = (taskList) => {
   const savedTasks = [];
   const tasks = [...taskList.children];
 
-  for (let i = tasks.length - 1; i >= 0; --i) {
-    const taskText = tasks[i].querySelector(".task__message").innerText;
-    const isComplete = tasks[i].classList.contains("complete");
+  tasks.forEach((task) => {
+    const taskText = task.querySelector(".task__message").innerText;
+    const isComplete = task.classList.contains("complete");
     savedTasks.push([taskText, isComplete]);
-  }
+  });
 
-  localStorage.setItem("todo task list", JSON.stringify(savedTasks));
+  localStorage.setItem("todo task list", JSON.stringify(savedTasks.reverse()));
 };
 
 export const load = (taskList) => {
