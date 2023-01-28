@@ -83,11 +83,11 @@ export const createControls = (taskList) => {
 
   document
     .getElementById("clear-complete")
-    .addEventListener("click", removeCompleted.bind(null, taskList));
+    .addEventListener("click", () => { removeCompleted(taskList); });
 
   document
     .getElementById("check-all")
-    .addEventListener("click", markAll.bind(null, taskList));
+    .addEventListener("click", () => { markAll(taskList); });
 };
 
 const removeCompleted = (taskList) => {
