@@ -41,11 +41,15 @@ const addButton = (type, task, container) => {
   if (type === "check") {
     button.classList.add("task__status");
     button.innerHTML = `<img class="task__status-img" src="images/check-mark.svg" alt="Кнопка выполнения задачи">`;
-    button.addEventListener("click", () => { finishTask(task, container); });
+    button.addEventListener("click", () => {
+      finishTask(task, container);
+    });
   } else {
     button.classList.add("task__delete-button");
     button.innerHTML = `<img class="task__delete-img" src="images/delete.svg" alt="Кнопка удаления">`;
-    button.addEventListener("click", () => { removeTask(task, container); });
+    button.addEventListener("click", () => {
+      removeTask(task, container);
+    });
   }
 
   task.append(button);

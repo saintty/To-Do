@@ -81,13 +81,13 @@ export const createControls = (taskList) => {
     });
   });
 
-  document
-    .getElementById("clear-complete")
-    .addEventListener("click", () => { removeCompleted(taskList); });
+  document.getElementById("clear-complete").addEventListener("click", () => {
+    removeCompleted(taskList);
+  });
 
-  document
-    .getElementById("check-all")
-    .addEventListener("click", () => { markAll(taskList); });
+  document.getElementById("check-all").addEventListener("click", () => {
+    markAll(taskList);
+  });
 };
 
 const removeCompleted = (taskList) => {
