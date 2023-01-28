@@ -1,7 +1,11 @@
 import * as utils from "./utils.js";
 import * as storage from "./localStorage.js";
 
-export function createTask(container, message, { isComplete = false, isVisible = true }) {
+export const createTask = (
+  container,
+  message,
+  { isComplete = false, isVisible = true }
+) => {
   const task = document.createElement("li");
   task.classList.add("todo__item", "task");
   task.setAttribute("data-visibility", isVisible ? "shown" : "hidden");
@@ -15,9 +19,9 @@ export function createTask(container, message, { isComplete = false, isVisible =
   addButton("del", task, container);
 
   container.prepend(task);
-}
+};
 
-function addDescription(message, task, container) {
+const addDescription = (message, task, container) => {
   const description = document.createElement("p");
   description.classList.add("task__message");
   description.innerText = message;
@@ -45,9 +49,9 @@ function addDescription(message, task, container) {
   });
 
   task.appendChild(description);
-}
+};
 
-function addButton(type, task, container) {
+const addButton = (type, task, container) => {
   const button = document.createElement("button");
   button.classList.add("task__button");
 
@@ -83,4 +87,4 @@ function addButton(type, task, container) {
 
   button.append(buttonImg);
   task.append(button);
-}
+};

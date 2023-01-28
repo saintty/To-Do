@@ -1,7 +1,7 @@
 import { createTask } from "./task.js";
 import { updateAmountOfActiveTasks } from "./utils.js";
 
-export function save(taskList) {
+export const save = (taskList) => {
   const savedTasks = [];
   const tasks = [...taskList.children];
 
@@ -12,19 +12,18 @@ export function save(taskList) {
   }
 
   localStorage.setItem("todo task list", JSON.stringify(savedTasks));
-}
+};
 
-export function load(taskList) {
+export const load = (taskList) => {
   let savedTasks = localStorage.getItem("todo task list");
 
   if (savedTasks) {
     savedTasks = JSON.parse(savedTasks);
 
     savedTasks.forEach((task) => {
-      createTask(taskList, task[0], {isComplete: task[1]});
+      createTask(taskList, task[0], { isComplete: task[1] });
     });
   }
 
   updateAmountOfActiveTasks(taskList);
-}
-
+};
