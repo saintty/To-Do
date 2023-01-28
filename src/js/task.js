@@ -21,31 +21,37 @@ export const createTask = (
   container.prepend(task);
 };
 
+const editMessage = (event) => {
+  event.target.contentEditable = true;
+  event.target.focus();
+};
+
+const checkCorrectMessage = (event, container) => {
+  event.target.contentEditable = false;
+  const newMessage = event.target.innerText
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line)
+    .join("\n");
+
+  if (newMessage.length) {
+    event.target.innerText = newMessage;
+  } else {
+    event.target.parentNode.remove();
+    utils.updateAmountOfActiveTasks(container);
+  }
+
+  storage.save(container);
+};
+
 const addDescription = (message, task, container) => {
   const description = document.createElement("p");
   description.classList.add("task__message");
   description.innerText = message;
 
-  description.addEventListener("dblclick", function () {
-    this.contentEditable = true;
-    this.focus();
-  });
-
-  description.addEventListener("blur", function () {
-    this.contentEditable = false;
-    const newMessage = this.innerText
-      .split("\n")
-      .filter((line) => line)
-      .map((line) => line.trim())
-      .join("\n");
-
-    if (newMessage.length) {
-      this.innerText = newMessage;
-    } else {
-      this.parentNode.remove();
-      storage.save(container);
-      utils.updateAmountOfActiveTasks(container);
-    }
+  description.addEventListener("dblclick", editMessage);
+  description.addEventListener("blur", (event) => {
+    checkCorrectMessage(event, container);
   });
 
   task.appendChild(description);

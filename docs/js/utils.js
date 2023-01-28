@@ -29,7 +29,7 @@ export const setTaskVisibility = (task) => {
   }
 };
 
-const checkAllTask = (taskList) => {
+const switchGeneralCompleteness = (taskList) => {
   const tasks = [...taskList.children];
   const isAllChecked = tasks.every((task) =>
     task.classList.contains("complete")
@@ -83,14 +83,22 @@ export const createControls = (taskList) => {
     });
   });
 
-  document.getElementById("clear-complete").addEventListener("click", () => {
-    clearCompletedTasks(taskList);
-    storage.save(taskList);
-  });
+  document
+    .getElementById("clear-complete")
+    .addEventListener("click", removeCompleted.bind(null, taskList));
 
-  document.getElementById("check-all").addEventListener("click", () => {
-    checkAllTask(taskList);
-    storage.save(taskList);
-    updateAmountOfActiveTasks(taskList);
-  });
+  document
+    .getElementById("check-all")
+    .addEventListener("click", markAll.bind(null, taskList));
+};
+
+const removeCompleted = (taskList) => {
+  clearCompletedTasks(taskList);
+  storage.save(taskList);
+};
+
+const markAll = (taskList) => {
+  switchGeneralCompleteness(taskList);
+  storage.save(taskList);
+  updateAmountOfActiveTasks(taskList);
 };
