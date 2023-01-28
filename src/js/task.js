@@ -65,9 +65,7 @@ const addButton = (type, task, container) => {
 
     button.addEventListener("click", () => {
       task.classList.toggle("complete");
-      setTimeout(() => {
-        utils.setTaskVisibility(task);
-      }, 300);
+      utils.setTaskVisibility(task);
 
       storage.save(container);
       utils.updateAmountOfActiveTasks(container);

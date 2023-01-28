@@ -42,9 +42,7 @@ const checkAllTask = (taskList) => {
       task.classList.add("complete");
     }
 
-    setTimeout(() => {
-      setTaskVisibility(task);
-    }, 300);
+    setTaskVisibility(task);
   });
 };
 
