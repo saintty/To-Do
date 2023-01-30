@@ -36,20 +36,13 @@ const addDescription = (message, task, container) => {
 
 const addButton = (type, task, container) => {
   const button = document.createElement("button");
-  button.classList.add("task__button");
+  button.classList.add("task__button", type === "check" ? "task__status" : "task__delete");
 
-  if (type === "check") {
-    button.classList.add("task__status");
-    button.addEventListener("click", () => {
-      finishTask(task, container);
-    });
-  } else {
-    button.classList.add("task__delete");
-    button.addEventListener("click", () => {
-      removeTask(task, container);
-    });
-  }
-
+  button.addEventListener("click", () => {
+    type === "check"
+    ? finishTask(task, container)
+    : removeTask(task, container)
+  });
   task.append(button);
 };
 
