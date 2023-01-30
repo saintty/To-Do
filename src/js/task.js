@@ -45,7 +45,6 @@ const addButton = (type, task, container) => {
     });
   } else {
     button.classList.add("task__delete-button");
-    // button.innerHTML = `<img class="task__delete-img" src="images/delete.svg" alt="Кнопка удаления">`;
     button.addEventListener("click", () => {
       removeTask(task, container);
     });
