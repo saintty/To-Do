@@ -44,7 +44,7 @@ const addButton = (type, task, container) => {
       finishTask(task, container);
     });
   } else {
-    button.classList.add("task__delete-button");
+    button.classList.add("task__delete");
     button.addEventListener("click", () => {
       removeTask(task, container);
     });

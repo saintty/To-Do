@@ -151,7 +151,7 @@
     padding: 4px 15px;
   }
 
-  &__delete-button {
+  &__delete {
     margin-left: 30px;
 
     opacity: 0;
@@ -159,7 +159,7 @@
     transition: all 0.1s linear;
   }
 
-  &__delete-button::before {
+  &__delete::before {
     display: block;
     width: 20px;
     height: 20px;
@@ -172,12 +172,12 @@
     content: "";
   }
 
-  &__delete-button:focus::before,
-  &:hover &__delete-button {
+  &__delete:focus::before,
+  &:hover &__delete {
     opacity: 0.5;
   }
 
-  &:hover &__delete-button:hover {
+  &:hover &__delete:hover {
     opacity: 1;
   }
 }

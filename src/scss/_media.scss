@@ -79,13 +79,13 @@
       height: 25px;
     }
 
-    &__delete-button {
+    &__delete {
       margin-left: 15px;
     }
 
-    &__delete-button,
-    &:hover &__delete-button,
-    &:hover &__delete-button:hover {
+    &__delete,
+    &:hover &__delete,
+    &:hover &__delete:hover {
       opacity: 1;
     }
 
@@ -162,7 +162,7 @@
       line-height: 20px;
     }
 
-    &__delete-button::before {
+    &__delete::before {
       width: 15px;
       height: 15px;
     }
