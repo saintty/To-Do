@@ -21,16 +21,16 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="body">
+<body class="root">
   <div class="wrapper">
-    <header class="header">
-      <h1 class="header__title title">To Do</h1>
+    <header class="top-caption">
+      <h1 class="top-caption__title title">To Do</h1>
     </header>
 
-    <main class="main">
+    <main class="content">
       <div class="container">
-        <form id="form" class="form">
-          <input id="input" class="form__input" type="text" placeholder="Что необходимо выполнить?" autocomplete="off">
+        <form id="task-creation-form" class="form">
+          <input id="task-creation-field" class="form__input" type="text" placeholder="Что необходимо выполнить?" autocomplete="off">
         </form>
         <section class="todo">
           <div class="todo__controls">
@@ -53,8 +53,8 @@
       </div>
     </main>
 
-    <footer class="footer">
-      <h1 class="footer__title title">List</h1>
+    <footer class="bottom-caption">
+      <h1 class="bottom-caption__title title">List</h1>
     </footer>
   </div>
   <script type="module" src="js/main.js"></script>

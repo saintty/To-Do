@@ -3,8 +3,8 @@ import * as storage from "./localStorage.js";
 import * as task from "./task.js";
 
 const init = () => {
-  const form = document.getElementById("form");
-  const input = document.getElementById("input");
+  const form = document.getElementById("task-creation-form");
+  const input = document.getElementById("task-creation-field");
   const taskList = document.getElementById("todo__list");
   const inputHandler = handelInputMessage(input, taskList);
 

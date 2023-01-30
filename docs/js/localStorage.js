@@ -11,11 +11,11 @@ export const save = (taskList) => {
     savedTasks.push([taskText, isComplete]);
   });
 
-  localStorage.setItem("todo task list", JSON.stringify(savedTasks.reverse()));
+  localStorage.setItem("todoTaskList", JSON.stringify(savedTasks.reverse()));
 };
 
 export const load = (taskList) => {
-  let savedTasks = localStorage.getItem("todo task list");
+  let savedTasks = localStorage.getItem("todoTaskList");
 
   if (savedTasks) {
     savedTasks = JSON.parse(savedTasks);
