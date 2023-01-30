@@ -123,21 +123,25 @@
     background-color: $mark-hover;
   }
 
-  &__status-img {
+  &__status::before {
     display: block;
     width: 30px;
     height: 30px;
 
+    background-image: url("../images/check-mark.svg");
+    background-size: cover;
     opacity: 0;
 
     transition: all 0.2s linear;
+
+    content: "";
   }
 
   &.complete {
     background-color: $task-complete;
   }
 
-  &.complete &__status-img {
+  &.complete &__status::before {
     opacity: 1;
   }
 
@@ -150,26 +154,31 @@
   &__delete-button {
     margin-left: 30px;
 
-    background-color: transparent;
-    border: none;
     opacity: 0;
 
     transition: all 0.1s linear;
   }
 
-  &__delete-button:focus,
+  &__delete-button::before {
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    background-image: url("../images/delete.svg");
+    background-size: cover;
+
+    transition: all 0.1s linear;
+
+    content: "";
+  }
+
+  &__delete-button:focus::before,
   &:hover &__delete-button {
     opacity: 0.5;
   }
 
   &:hover &__delete-button:hover {
     opacity: 1;
-  }
-
-  &__delete-img {
-    display: block;
-    width: 20px;
-    height: 20px;
   }
 }
 

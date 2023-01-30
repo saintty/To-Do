@@ -74,7 +74,7 @@
       background-color: #fff;
     }
 
-    &__status-img {
+    &__status::before {
       width: 25px;
       height: 25px;
     }
@@ -150,7 +150,7 @@
       margin-right: 10px;
     }
 
-    &__status-img {
+    &__status::before {
       width: 20px;
       height: 20px;
     }
@@ -162,7 +162,7 @@
       line-height: 20px;
     }
 
-    &__delete-img {
+    &__delete-button::before {
       width: 15px;
       height: 15px;
     }
